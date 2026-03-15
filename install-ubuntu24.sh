@@ -9,6 +9,7 @@ PYTHON_BIN="python3.12"
 SYS_PACKAGES=(
     build-essential cmake git pkg-config
     libgtk-3-dev
+    qt6-base-dev libqt6core5compat6-dev
     libavcodec-dev libavformat-dev libswscale-dev libavutil-dev
     libxvidcore-dev libx264-dev
     libtbb-dev
@@ -263,6 +264,7 @@ build_opencv() {
         -D OPENCV_ENABLE_NONFREE=ON
         -D OPENCV_EXTRA_MODULES_PATH="$BUILD_DIR/opencv_contrib/modules"
         # ── Hardware ──────────────────────────────────────────────────────────
+        -D WITH_QT=ON
         -D WITH_TBB=ON
         -D WITH_V4L=ON
         -D WITH_OPENGL=ON
