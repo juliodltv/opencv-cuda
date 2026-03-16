@@ -19,6 +19,7 @@ SYS_PACKAGES=(
     libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
     python3.12-dev python3-pip
     libopenblas-dev liblapack-dev liblapacke-dev
+    libeigen3-dev
     libv4l-dev v4l-utils
     libhdf5-dev
 )
@@ -266,7 +267,12 @@ build_opencv() {
         # ── Hardware ──────────────────────────────────────────────────────────
         -D WITH_QT=ON
         -D QT_DEFAULT_MAJOR_VERSION=5
+        -D WITH_EIGEN=ON
+        -D WITH_LAPACK=ON
+        -D WITH_OPENCL=ON
         -D WITH_OPENMP=ON
+        -D CPU_BASELINE=AVX2
+        -D CPU_DISPATCH=AVX,AVX2
         -D WITH_TBB=ON
         -D WITH_V4L=ON
         -D WITH_OPENGL=ON
@@ -277,6 +283,7 @@ build_opencv() {
         -D INSTALL_PYTHON_EXAMPLES=OFF
         -D BUILD_TESTS=OFF
         -D BUILD_PERF_TESTS=OFF
+        -D OPENCV_GENERATE_PKGCONFIG=ON
     )
 
     [[ -n "$PYTHON_LIBRARY" ]] && CMAKE_ARGS+=(-D PYTHON3_LIBRARY="$PYTHON_LIBRARY")
