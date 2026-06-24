@@ -80,8 +80,11 @@ prepare_nvcuvid() {
     local zip=""
     for candidate in \
         "$(dirname "$0")/Video_Codec_SDK"*.zip \
+        "$(dirname "$0")/Video_Codec_Interface"*.zip \
         ~/Video_Codec_SDK*.zip \
-        ~/Downloads/Video_Codec_SDK*.zip
+        ~/Video_Codec_Interface*.zip \
+        ~/Downloads/Video_Codec_SDK*.zip \
+        ~/Downloads/Video_Codec_Interface*.zip
     do
         for f in $candidate; do
             [[ -f "$f" ]] && { zip="$f"; break 2; }
@@ -249,6 +252,7 @@ build_opencv() {
         -D CUDA_FAST_MATH=1
         -D WITH_CUBLAS=1
         -D WITH_NVCUVID="${NVCUVID_ENABLED:-0}"
+        -D WITH_NVCUVENC="${NVCUVID_ENABLED:-0}"
         # ── cuDNN ─────────────────────────────────────────────────────────────
         -D CUDNN_INCLUDE_DIR="$CUDNN_INCLUDE"
         -D CUDNN_LIBRARY="$CUDNN_LIB"
